@@ -1,5 +1,9 @@
 import cv2
+import os
 import numpy as np
+
+def jpeg_to_video(path):
+	os.system("ffmpeg -r 30 -i {}/img%01d.jpeg -vcodec mpeg4 -y extracted_wms.mp4".format(path))
 
 class ArnoldTransform:
 	def __init__(self, img):
