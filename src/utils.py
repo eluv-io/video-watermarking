@@ -54,6 +54,12 @@ def derandomize_img(img):
 		img[:,:,i] = derandomize_channel(img[:,:,i])
 	return img
 
+def rebin(a, shape):
+	if a.shape[0] % 2 == 1:
+		a = np.vstack((a, np.zeros((1, a.shape[1]))))
+	sh = shape[0], a.shape[0] // shape[0], shape[1], a.shape[1] // shape[1]
+	return a.reshape(sh).mean(-1).mean(1)
+
 if __name__ == '__main__':
 	img = cv2.imread('../pics/wmks/wmk1.jpg', cv2.IMREAD_GRAYSCALE)
 	at = ArnoldTransform(img)
